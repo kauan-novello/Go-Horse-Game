@@ -92,10 +92,16 @@ int checkCollision(int horseX, int horseY, int *obstacles, int numObstacles) {
 
 // Timer no canto da tela
 void printTimer(int elapsedTime) {
-    int minutes = elapsedTime / 60;
-    int seconds = elapsedTime % 60;
+    struct tempo{
+        int minutes;
+        int seconds;
+    }tempo;
+    tempo.minutes = elapsedTime / 60;
+    tempo.seconds = elapsedTime % 60;
+    // int minutes = elapsedTime / 60;
+    // int seconds = elapsedTime % 60;
     screenGotoxy(MAXX - 10, 0); // Posição do Timer
-    printf("Time: %02d:%02d", minutes, seconds);
+    printf("Time: %02d:%02d", tempo.minutes, tempo.seconds);
 }
 
 // Printa "Game Over" e o tempo que o jogador ficou vivo
