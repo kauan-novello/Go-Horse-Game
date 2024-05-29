@@ -49,7 +49,7 @@ void initGround()
 {
     for (int i = 0; i < MAXX; i++)
     {
-        ground[i] = '_';
+        ground[i] = '=';
     }
     ground[MAXX] = '\0';
 }
@@ -156,7 +156,7 @@ int funcaoJogo()
         num1 += 30;
     }
 
-    int obstacles[1] = {num1}; // Posição dos Obstaculos
+    int obstacles[1] = {num1}; // Qtd e posição dos Obstaculos
 
     time_t startTime = time(NULL); // Inicializa o timer
 
@@ -174,7 +174,7 @@ int funcaoJogo()
             if (ch == 'w' && !jumping)
             {
                 jumping = 1;      // Jumping == True
-                jumpCounter = 12; // Tamanho do Pulo
+                jumpCounter = 9; // Tamanho do Pulo
             }
         }
         // Atualizar estado do jogo (mover elementos, checkar colisão, etc...)
@@ -287,7 +287,8 @@ int menu()
     scanf("%14s", palavra);
 
     if (strcmp(palavra, "start") == 0)
-    {
+    {   
+        printf("Use a tecla 'w' para fazer seu cavalo pular sobre os obstáculos.");
         funcaoJogo();
         strcpy(palavra, "quit");
     }
