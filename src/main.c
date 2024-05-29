@@ -9,8 +9,6 @@
 
 #define MAXX 80
 #define MAXY 24
-#define MINX 0
-#define MINY 0
 
 #define HORSE_WIDTH 14
 
@@ -115,10 +113,10 @@ void printTimer(int elapsedTime)
         int minutes;
         int seconds;
     } tempo;
+
     tempo.minutes = elapsedTime / 60;
     tempo.seconds = elapsedTime % 60;
-    // int minutes = elapsedTime / 60;
-    // int seconds = elapsedTime % 60;
+
     screenGotoxy(MAXX - 10, 0); // Posição do Timer
     printf("Time: %02d:%02d", tempo.minutes, tempo.seconds);
 }
@@ -127,10 +125,7 @@ void printTimer(int elapsedTime)
 void showGameOver(int elapsedTime)
 {
     screenClear();
-    screenGotoxy(MAXX / 2 - 5, MAXY / 2);
     printf("Game Over!\n");
-
-    screenGotoxy(MAXX / 2 - 10, MAXY / 2 + 1);
     printf("Você sobreviveu por %d segundos.\n", elapsedTime);
 
     screenUpdate();
@@ -193,16 +188,16 @@ int funcaoJogo()
             {
                 if (jumpCounter > 0)
                 {
-                    y -= 1; // Increase the jump height
+                    y -= 1; // Altura do salto
                     jumpCounter--;
                 }
                 else
                 {
-                    y += 1; // Increase the falling speed
+                    y += 1; // Gravidade
                     if (y >= MAXY - 8)
                     {
                         jumping = 0;
-                        y = MAXY - 8; // Reset to above ground level
+                        y = MAXY - 8; // Volta pro chão
                     }
                 }
             }
@@ -221,6 +216,7 @@ int funcaoJogo()
             if (checkCollision(x, y, obstacles, numObstacles))
             {
                 int elapsedTime = (int)(time(NULL) - startTime);
+                system("clear");
                 showGameOver(elapsedTime);
                 break;
             }
@@ -238,7 +234,6 @@ int funcaoJogo()
     }
 
     keyboardDestroy();
-    // screenDestroy();
     timerDestroy();
     return 0;
 }
@@ -318,12 +313,12 @@ int menu()
 int main()
 {
     system("clear");
-    printf("Olá Bem vindo ao GO Horse \n");
+    printf("Olá Bem vindo ao GO Horse\n");
     for (int i = 0; i < 6; i++)
     {
         printf("%s", cavalo[i]);
     }
     printf("\n");
     menu();
-    return 0;   
+    return 0;
 }
